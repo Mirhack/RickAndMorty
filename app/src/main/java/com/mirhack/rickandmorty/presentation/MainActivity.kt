@@ -1,4 +1,4 @@
-package com.mirhack.rickandmorty
+package com.mirhack.rickandmorty.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.mirhack.rickandmorty.ui.theme.RickAndMortyTheme
+import com.mirhack.rickandmorty.presentation.ui.theme.RickAndMortyTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

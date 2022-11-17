@@ -1,4 +1,4 @@
-package com.mirhack.rickandmorty.ui.theme
+package com.mirhack.rickandmorty.presentation.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
