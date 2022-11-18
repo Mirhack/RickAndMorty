@@ -3,7 +3,7 @@ package com.mirhack.rickandmorty.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class CharactersResponseInfo(
+data class CharactersResponseInfoDTO(
     @SerializedName("count")
     val count: Int,
     @SerializedName("pages")

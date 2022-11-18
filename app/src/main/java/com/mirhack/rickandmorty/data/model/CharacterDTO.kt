@@ -3,7 +3,7 @@ package com.mirhack.rickandmorty.data.model
 
 import com.google.gson.annotations.SerializedName
 
-data class Character(
+data class CharacterDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
@@ -17,9 +17,9 @@ data class Character(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("origin")
-    val origin: Origin,
+    val origin: OriginDTO,
     @SerializedName("location")
-    val location: Location,
+    val location: LocationDTO,
     @SerializedName("image")
     val image: String,
     @SerializedName("episode")
