@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="shark">#FF212328</color>
+    <color name="rickBg">#FF88C7C3</color>
 </resources>
