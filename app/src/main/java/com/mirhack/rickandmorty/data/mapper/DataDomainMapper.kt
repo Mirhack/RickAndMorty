@@ -32,7 +32,7 @@ fun OriginDTO.toDomain() =
 fun LocationDTO.toDomain() =
     Location(name, url.getId())
 
-fun List<EpisodeDTO>.toDomain() =
+fun List<EpisodeDTO>.toDomainEpisodes() =
     map(EpisodeDTO::toDomain)
 
 fun EpisodeDTO.toDomain() =

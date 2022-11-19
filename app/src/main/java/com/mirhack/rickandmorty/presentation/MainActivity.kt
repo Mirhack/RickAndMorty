@@ -15,6 +15,7 @@ import androidx.navigation.navArgument
 import com.mirhack.rickandmorty.presentation.navigation.Routes
 import com.mirhack.rickandmorty.presentation.screens.characterInfo.CharacterInfoScreen
 import com.mirhack.rickandmorty.presentation.screens.charactersList.CharactersListScreen
+import com.mirhack.rickandmorty.presentation.screens.episodeInfo.EpisodeInfoScreen
 import com.mirhack.rickandmorty.presentation.ui.theme.RickAndMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +40,16 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Routes.CharacterInfoScreen.route + "/{id}",
                             arguments = listOf(navArgument("id") { type = NavType.IntType })
-                        ) { backStackEntry -> CharacterInfoScreen(backStackEntry.arguments?.getInt("id")) }
+                        ) { backStackEntry ->
+                            CharacterInfoScreen(
+                                id = backStackEntry.arguments?.getInt("id"),
+                                navController = navController
+                            )
+                        }
+                        composable(
+                            route = Routes.EpisodeInfoScreen.route + "/{id}",
+                            arguments = listOf(navArgument("id") { type = NavType.IntType })
+                        ) { backStackEntry -> EpisodeInfoScreen(backStackEntry.arguments?.getInt("id")) }
                     }
                 }
             }

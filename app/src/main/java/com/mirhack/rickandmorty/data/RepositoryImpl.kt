@@ -1,6 +1,8 @@
 package com.mirhack.rickandmorty.data
 
 import com.mirhack.rickandmorty.data.mapper.toDomain
+import com.mirhack.rickandmorty.data.mapper.toDomainCharacters
+import com.mirhack.rickandmorty.data.mapper.toDomainEpisodes
 import com.mirhack.rickandmorty.domain.Repository
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.domain.model.Episode
@@ -15,10 +17,13 @@ class RepositoryImpl @Inject constructor(
     override suspend fun getCharacter(id: Int): Character =
         withContext(IO) { apiService.singleCharacter(id).toDomain() }
 
+    override suspend fun getCharacters(ids: List<Int>): List<Character> =
+        withContext(IO) { apiService.multipleCharacters(ids).toDomainCharacters() }
+
     override suspend fun getEpisode(id: Int): Episode =
         withContext(IO) { apiService.singleEpisode(id).toDomain() }
 
     override suspend fun getEpisodes(ids: List<Int>): List<Episode> =
-        withContext(IO) { apiService.multipleEpisodes(ids).toDomain() }
+        withContext(IO) { apiService.multipleEpisodes(ids).toDomainEpisodes() }
 
 }
