@@ -6,15 +6,15 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
 import com.mirhack.rickandmorty.presentation.navigation.Routes
-import com.mirhack.rickandmorty.presentation.screens.CharactersScreen
+import com.mirhack.rickandmorty.presentation.screens.characterInfo.CharacterInfoScreen
+import com.mirhack.rickandmorty.presentation.screens.charactersList.CharactersListScreen
 import com.mirhack.rickandmorty.presentation.ui.theme.RickAndMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -31,9 +31,15 @@ class MainActivity : ComponentActivity() {
                     val navController = rememberNavController()
                     NavHost(
                         navController = navController,
-                        startDestination = Routes.CharactersScreen.route
+                        startDestination = Routes.CharactersListScreen.route
                     ) {
-                        composable(Routes.CharactersScreen.route) { CharactersScreen() }
+                        composable(Routes.CharactersListScreen.route) {
+                            CharactersListScreen(navController)
+                        }
+                        composable(
+                            route = Routes.CharacterInfoScreen.route + "/{id}",
+                            arguments = listOf(navArgument("id") { type = NavType.IntType })
+                        ) { backStackEntry -> CharacterInfoScreen(backStackEntry.arguments?.getInt("id")) }
                     }
                 }
             }

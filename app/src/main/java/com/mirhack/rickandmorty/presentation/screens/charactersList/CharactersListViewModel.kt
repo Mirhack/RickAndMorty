@@ -1,4 +1,4 @@
-package com.mirhack.rickandmorty.presentation.screens
+package com.mirhack.rickandmorty.presentation.screens.charactersList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,12 +16,12 @@ import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
 @HiltViewModel
-class CharactersScreenViewModel @Inject constructor(
+class CharactersListViewModel @Inject constructor(
     private val source: CharactersSource
 ) : ViewModel() {
 
-    private val _viewModelState = MutableStateFlow(CharactersState())
-    val viewModelState: StateFlow<CharactersState>
+    private val _viewModelState = MutableStateFlow(CharactersListState())
+    val viewModelState: StateFlow<CharactersListState>
         get() = _viewModelState
 
     init {
