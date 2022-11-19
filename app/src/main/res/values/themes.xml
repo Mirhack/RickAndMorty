@@ -4,4 +4,8 @@
     <style name="Theme.RickAndMorty" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:statusBarColor">@color/shark</item>
     </style>
+
+    <style name="SplashScreenTheme" parent="Theme.RickAndMorty">
+        <item name="android:windowBackground">@drawable/bg_splash</item>
+    </style>
 </resources>
