@@ -20,6 +20,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.presentation.elements.CharacterTitle
+import com.mirhack.rickandmorty.presentation.elements.Loader
 import com.mirhack.rickandmorty.presentation.elements.TextBlock
 
 
@@ -29,6 +30,14 @@ fun CharacterInfoScreen(id: Int?) {
     LaunchedEffect(key1 = id) { id?.let { viewModel.init(it) } }
     val uiState by remember { viewModel.viewModelState }.collectAsState()
 
+    if (uiState.character == null)
+        Loader()
+    else
+        Content(uiState)
+}
+
+@Composable
+private fun Content(uiState: CharactersInfoState) {
     Column(
         Modifier
             .fillMaxWidth()

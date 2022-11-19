@@ -25,8 +25,9 @@ import androidx.paging.compose.items
 import coil.compose.AsyncImage
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.domain.model.Character
-import com.mirhack.rickandmorty.presentation.elements.TextBlock
 import com.mirhack.rickandmorty.presentation.elements.CharacterTitle
+import com.mirhack.rickandmorty.presentation.elements.Loader
+import com.mirhack.rickandmorty.presentation.elements.TextBlock
 import com.mirhack.rickandmorty.presentation.navigation.Routes
 import com.mirhack.rickandmorty.presentation.ui.theme.Shapes
 
@@ -38,6 +39,18 @@ fun CharactersListScreen(navController: NavHostController) {
     val characterListItems: LazyPagingItems<Character> =
         uiState.characters.collectAsLazyPagingItems()
 
+    if (uiState.isLoading)
+        Loader()
+    else
+        Content(characterListItems, navController)
+
+}
+
+@Composable
+private fun Content(
+    characterListItems: LazyPagingItems<Character>,
+    navController: NavHostController
+) {
     LazyColumn(content = {
         items(characterListItems) { character ->
             character?.let {

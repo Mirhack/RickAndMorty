@@ -4,11 +4,16 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.mirhack.rickandmorty.data.mapper.toDomainCharacters
 import com.mirhack.rickandmorty.domain.model.Character
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 class CharactersSource @Inject constructor(
     private val apiService: RickAndMortyApiService
 ) : PagingSource<Int, Character>() {
+
+    private val _loadingPage = MutableStateFlow(-1)
+    val loadingPage = _loadingPage.asStateFlow()
 
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
         return state.anchorPosition
@@ -17,6 +22,7 @@ class CharactersSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         return try {
             val page = params.key ?: 1
+            _loadingPage.emit(page)
             val charactersResponse = apiService.listCharacters(page = page)
             LoadResult.Page(
                 data = charactersResponse.results.toDomainCharacters(),
@@ -25,6 +31,8 @@ class CharactersSource @Inject constructor(
             )
         } catch (exception: Exception) {
             return LoadResult.Error(exception)
+        } finally {
+            _loadingPage.emit(-1)
         }
     }
 }

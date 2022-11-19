@@ -12,6 +12,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
 import javax.inject.Inject
 
@@ -25,6 +27,7 @@ class CharactersListViewModel @Inject constructor(
         get() = _viewModelState
 
     init {
+        observeLoading()
         initListCharacters()
     }
 
@@ -34,5 +37,11 @@ class CharactersListViewModel @Inject constructor(
         }.flow.cachedIn(viewModelScope)
 
         _viewModelState.update { it.copy(characters = characters) }
+    }
+
+    private fun observeLoading() {
+        source.loadingPage.onEach { loadingPage ->
+            _viewModelState.update { it.copy(isLoading = loadingPage == 1) }
+        }.launchIn(viewModelScope)
     }
 }
