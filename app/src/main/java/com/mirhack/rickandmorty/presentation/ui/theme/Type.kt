@@ -15,12 +15,17 @@ val Typography = Typography(
     ),
     h2 = TextStyle(
         fontFamily = FontFamily.Default,
-        fontWeight = FontWeight.Light,
-        fontSize = 18.sp
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp
     ),
     h3 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
+        fontSize = 18.sp
+    ),
+    h4 = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Light,
         fontSize = 18.sp
     ),
     subtitle1 = TextStyle(

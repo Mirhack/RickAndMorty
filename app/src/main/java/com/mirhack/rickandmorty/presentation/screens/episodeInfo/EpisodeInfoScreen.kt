@@ -1,10 +1,12 @@
 package com.mirhack.rickandmorty.presentation.screens.episodeInfo
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
@@ -14,11 +16,17 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.times
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.presentation.elements.Loader
+import com.mirhack.rickandmorty.presentation.elements.SMALL_CARD_SIZE
 import com.mirhack.rickandmorty.presentation.elements.SmallCharacterCard
+import com.mirhack.rickandmorty.presentation.elements.TextBlock
+import com.mirhack.rickandmorty.presentation.models.EpisodeInfoModel
 import com.mirhack.rickandmorty.presentation.navigation.Routes
 import com.mirhack.rickandmorty.presentation.ui.theme.Typography
 
@@ -39,7 +47,7 @@ fun EpisodeInfoScreen(id: Int?, navController: NavController) {
 private fun Content(uiState: EpisodeInfoState, navController: NavController) {
     Column(
         Modifier
-            .fillMaxWidth()
+            .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
         uiState.episode?.let { episode ->
@@ -48,15 +56,39 @@ private fun Content(uiState: EpisodeInfoState, navController: NavController) {
                     text = episode.name,
                     style = Typography.h1,
                 )
-                LazyRow {
-                    items(episode.characters) {
-                        SmallCharacterCard(character = it, clickListener = { id ->
-                            navController.navigate(Routes.CharacterInfoScreen.route + "/$id")
-                        })
-                    }
-
-                }
+                TextBlock(
+                    title = stringResource(R.string.air_date),
+                    description = episode.airDate
+                )
+                TextBlock(
+                    title = stringResource(R.string.production_code),
+                    description = episode.code
+                )
+                CharactersSection(episode, navController)
             }
+        }
+    }
+}
+
+@Composable
+private fun CharactersSection(
+    episode: EpisodeInfoModel,
+    navController: NavController
+) {
+    Text(
+        modifier = Modifier.padding(top = 8.dp),
+        text = stringResource(R.string.characters),
+        style = Typography.h2,
+    )
+    val rowsCount = 3
+    LazyHorizontalGrid(
+        rows = GridCells.Fixed(rowsCount),
+        modifier = Modifier.height(rowsCount * SMALL_CARD_SIZE.dp)
+    ) {
+        items(episode.characters) {
+            SmallCharacterCard(character = it, clickListener = { id ->
+                navController.navigate(Routes.CharacterInfoScreen.route + "/$id")
+            })
         }
     }
 }

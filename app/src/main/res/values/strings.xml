@@ -4,4 +4,7 @@
     <string name="first_seen_in">First seen in:</string>
     <string name="gender">Gender</string>
     <string name="episodes">Episodes</string>
+    <string name="characters">Characters</string>
+    <string name="air_date">Air date</string>
+    <string name="production_code">Production code</string>
 </resources>

@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.Card
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -29,9 +30,9 @@ import com.mirhack.rickandmorty.presentation.ui.theme.Mantis
 import com.mirhack.rickandmorty.presentation.ui.theme.Mojo
 import com.mirhack.rickandmorty.presentation.ui.theme.Shapes
 import com.mirhack.rickandmorty.presentation.ui.theme.SilverChalice
-import com.mirhack.rickandmorty.presentation.ui.theme.Tuna
 import com.mirhack.rickandmorty.presentation.ui.theme.Typography
 
+const val SMALL_CARD_SIZE = 200
 private const val ALIVE = "Alive"
 private const val DEAD = "Dead"
 
@@ -78,8 +79,8 @@ fun SmallCharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
     Card(
         shape = Shapes.medium,
         modifier = Modifier
-            .padding(end = 8.dp)
-            .size(200.dp)
+            .padding(end = 16.dp, bottom = 16.dp)
+            .size(SMALL_CARD_SIZE.dp)
             .clickable { clickListener(character.id) }
     ) {
         Box {
@@ -92,7 +93,7 @@ fun SmallCharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
             )
             Text(
                 modifier = Modifier
-                    .background(color = Tuna)
+                    .background(color = MaterialTheme.colors.surface)
                     .fillMaxWidth()
                     .align(Alignment.BottomStart),
                 text = character.name,
@@ -147,7 +148,7 @@ fun TextBlock(
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
         text = description,
-        style = Typography.h2
+        style = Typography.h4
     )
 }
 
