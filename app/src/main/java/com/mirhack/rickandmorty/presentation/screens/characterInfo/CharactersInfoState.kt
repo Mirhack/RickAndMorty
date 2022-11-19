@@ -1,7 +1,7 @@
 package com.mirhack.rickandmorty.presentation.screens.characterInfo
 
-import com.mirhack.rickandmorty.domain.model.Character
+import com.mirhack.rickandmorty.presentation.models.CharacterInfoModel
 
 data class CharactersInfoState(
-    val character: Character? = null
+    val character: CharacterInfoModel? = null
 )

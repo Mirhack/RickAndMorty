@@ -2,6 +2,7 @@ package com.mirhack.rickandmorty.data
 
 import com.mirhack.rickandmorty.data.model.CharacterDTO
 import com.mirhack.rickandmorty.data.model.CharactersResponse
+import com.mirhack.rickandmorty.data.model.EpisodeDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,4 +18,14 @@ interface RickAndMortyApiService {
     suspend fun singleCharacter(
         @Path("id") id: Int
     ): CharacterDTO
+
+    @GET("api/episode/{ids}")
+    suspend fun multipleEpisodes(
+        @Path("ids") id: List<Int>
+    ): List<EpisodeDTO>
+
+    @GET("api/episode/{id}")
+    suspend fun singleEpisode(
+        @Path("id") id: Int
+    ): EpisodeDTO
 }

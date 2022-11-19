@@ -45,7 +45,13 @@ fun CharacterInfoScreen(id: Int?) {
 
         uiState.character?.let { character ->
             Column(Modifier.padding(16.dp)) {
-                CharacterTitle(character = character, showType = true)
+                CharacterTitle(
+                    name = character.name,
+                    type = character.type,
+                    status = character.status,
+                    species = character.species,
+                    showType = true
+                )
                 TextBlock(
                     title = stringResource(R.string.gender),
                     description = character.gender,
@@ -60,7 +66,8 @@ fun CharacterInfoScreen(id: Int?) {
                 )
                 TextBlock(
                     title = stringResource(R.string.episodes),
-                    description = character.episode.toString(),
+                    description = character.episodes.map { it.name }
+                        .reduce { acc, s -> acc.plus("\n$s") },
                 )
             }
         }

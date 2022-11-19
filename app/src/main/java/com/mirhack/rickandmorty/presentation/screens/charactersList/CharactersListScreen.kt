@@ -68,7 +68,14 @@ private fun CharacterCard(character: Character, clickListener: (id: Int) -> Unit
                 )
             }
             Column(Modifier.padding(16.dp, 8.dp, 8.dp, 8.dp)) {
-                CharacterTitle(character, false,1)
+                CharacterTitle(
+                    character.name,
+                    character.type,
+                    character.status,
+                    character.species,
+                    false,
+                    1
+                )
                 TextBlock(
                     title = stringResource(R.string.last_known_location),
                     description = character.location.name,

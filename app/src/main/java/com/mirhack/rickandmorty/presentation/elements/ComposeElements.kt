@@ -10,7 +10,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.presentation.ui.theme.Mantis
 import com.mirhack.rickandmorty.presentation.ui.theme.Mojo
 import com.mirhack.rickandmorty.presentation.ui.theme.SilverChalice
@@ -21,19 +20,26 @@ private const val DEAD = "Dead"
 
 
 @Composable
-fun CharacterTitle(character: Character, showType:Boolean, maxLines: Int = 999) {
+fun CharacterTitle(
+    name: String,
+    type: String,
+    status: String,
+    species: String,
+    showType: Boolean,
+    maxLines: Int = 999
+) {
     Text(
-        text = character.name,
+        text = name,
         style = Typography.h1,
         maxLines = maxLines,
         overflow = TextOverflow.Ellipsis,
     )
     Row(verticalAlignment = Alignment.CenterVertically) {
-        StatusCircle(character.status)
-        val type = if (showType && character.type.isNotEmpty()) "- ${character.type}" else ""
+        StatusCircle(status)
+        val typePlaceholder = if (showType && type.isNotEmpty()) "- $type" else ""
         Text(
             modifier = Modifier.padding(start = 8.dp),
-            text = "${character.status} - ${character.species} $type",
+            text = "$status - $species $typePlaceholder",
             style = Typography.h3,
             maxLines = maxLines,
             overflow = TextOverflow.Ellipsis,

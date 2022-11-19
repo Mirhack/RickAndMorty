@@ -3,6 +3,7 @@ package com.mirhack.rickandmorty.presentation.screens.characterInfo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mirhack.rickandmorty.domain.Repository
+import com.mirhack.rickandmorty.presentation.mapper.toCharacterInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,8 +22,10 @@ class CharacterInfoViewModel @Inject constructor(
 
     fun init(id: Int) {
         viewModelScope.launch {
-            repository.getCharacter(id)
-                .also { character -> _viewModelState.update { it.copy(character = character) } }
+            val character = repository.getCharacter(id)
+            val episodes = repository.getEpisodes(character.episodes)
+            _viewModelState.update { it.copy(character = character.toCharacterInfo(episodes)) }
         }
     }
+
 }
