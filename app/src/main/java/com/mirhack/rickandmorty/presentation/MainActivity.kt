@@ -49,7 +49,12 @@ class MainActivity : ComponentActivity() {
                         composable(
                             route = Routes.EpisodeInfoScreen.route + "/{id}",
                             arguments = listOf(navArgument("id") { type = NavType.IntType })
-                        ) { backStackEntry -> EpisodeInfoScreen(backStackEntry.arguments?.getInt("id")) }
+                        ) { backStackEntry ->
+                            EpisodeInfoScreen(
+                                id = backStackEntry.arguments?.getInt("id"),
+                                navController = navController
+                            )
+                        }
                     }
                 }
             }
