@@ -1,3 +1,16 @@
 <resources>
-    <string name="app_name">RickAndMorty</string>
+    <string name="app_name">Rick And Morty</string>
+    <string name="last_known_location">Last known location:</string>
+    <string name="first_seen_in">First seen in:</string>
+    <string name="gender">Gender</string>
+    <string name="episodes">Episodes</string>
+    <string name="characters">Characters</string>
+    <string name="air_date">Air date</string>
+    <string name="production_code">Production code</string>
+    <string name="type">Type</string>
+    <string name="dimension">Dimension</string>
+    <string name="residents">Residents</string>
+    <string name="error_line_1">Sorry, something went wrong</string>
+    <string name="error_line_2">Somewhere in the universe, one Morty is sad</string>
+    <string name="retry">Retry</string>
 </resources>
