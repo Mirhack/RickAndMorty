@@ -108,6 +108,7 @@ fun SmallCharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
                 modifier = Modifier
                     .background(color = MaterialTheme.colors.surface)
                     .fillMaxWidth()
+                    .padding(horizontal = 8.dp)
                     .align(Alignment.BottomStart),
                 text = character.name,
                 style = Typography.h3,

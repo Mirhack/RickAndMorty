@@ -4,10 +4,9 @@
         <color android:color="@color/shark" />
     </item>
     <item
+        android:gravity="center"
+        android:drawable="@drawable/rick_and_morty"
         android:left="20dp"
         android:right="20dp">
-        <bitmap
-            android:gravity="fill_horizontal"
-            android:src="@drawable/rickandmorty" />
     </item>
 </layer-list>
