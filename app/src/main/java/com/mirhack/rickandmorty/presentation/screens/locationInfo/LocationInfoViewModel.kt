@@ -3,7 +3,6 @@ package com.mirhack.rickandmorty.presentation.screens.locationInfo
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.mirhack.rickandmorty.domain.Repository
-import com.mirhack.rickandmorty.presentation.mapper.toCharacterInfo
 import com.mirhack.rickandmorty.presentation.mapper.toLocationInfo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,9 +22,14 @@ class LocationInfoViewModel @Inject constructor(
 
     fun init(id: Int) {
         viewModelScope.launch {
-            val location = repository.getLocation(id)
-            val characters = repository.getCharacters(location.residents)
-            _viewModelState.update { it.copy(location = location.toLocationInfo(characters)) }
+            try {
+                _viewModelState.update { it.copy(location = null, isLoadingError = false) }
+                val location = repository.getLocation(id)
+                val characters = repository.getCharacters(location.residents)
+                _viewModelState.update { it.copy(location = location.toLocationInfo(characters)) }
+            } catch (e: Exception) {
+                _viewModelState.update { it.copy(isLoadingError = true) }
+            }
         }
     }
 

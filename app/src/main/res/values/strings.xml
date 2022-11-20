@@ -10,4 +10,7 @@
     <string name="type">Type</string>
     <string name="dimension">Dimension</string>
     <string name="residents">Residents</string>
+    <string name="error_line_1">Sorry, something went wrong</string>
+    <string name="error_line_2">Somewhere in the universe, one Morty is sad</string>
+    <string name="retry">Retry</string>
 </resources>

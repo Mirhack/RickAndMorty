@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Chip
 import androidx.compose.material.CircularProgressIndicator
@@ -22,14 +23,20 @@ import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import coil.compose.AsyncImage
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.presentation.ui.theme.Mantis
@@ -220,5 +227,49 @@ fun StatusCircle(status: String) {
 fun Loader() {
     Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
         CircularProgressIndicator()
+    }
+}
+
+@Composable
+fun Error(onClick: () -> Unit) {
+    Column(
+        Modifier.fillMaxSize()
+    ) {
+        Box(modifier = Modifier.weight(0.5f, true)) {}
+        Box(
+            modifier = Modifier
+                .weight(1.5f, true),
+            contentAlignment = Alignment.Center
+        ) {
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Text(
+                    modifier = Modifier
+                        .padding(horizontal = 8.dp),
+                    text = stringResource(R.string.error_line_1),
+                    textAlign = TextAlign.Center,
+                    style = Typography.h1
+                )
+                Text(
+                    modifier = Modifier
+                        .padding(top = 8.dp, bottom = 48.dp, start = 64.dp, end = 64.dp),
+                    text = stringResource(R.string.error_line_2),
+                    textAlign = TextAlign.Center,
+                    style = Typography.h3
+                )
+                Button(onClick = onClick) {
+                    Text(text = stringResource(R.string.retry))
+                }
+            }
+        }
+
+        val composition by rememberLottieComposition(LottieCompositionSpec.Asset("morty-cry-loader.json"))
+        val progress by animateLottieCompositionAsState(composition)
+        LottieAnimation(
+            composition = composition,
+            modifier = Modifier
+                .weight(1.5f, true),
+            alignment = Alignment.BottomCenter,
+            progress = { progress },
+        )
     }
 }

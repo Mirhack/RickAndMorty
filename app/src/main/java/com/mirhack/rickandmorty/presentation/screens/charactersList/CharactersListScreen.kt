@@ -12,6 +12,7 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.items
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.presentation.elements.CharacterCard
+import com.mirhack.rickandmorty.presentation.elements.Error
 import com.mirhack.rickandmorty.presentation.elements.Loader
 import com.mirhack.rickandmorty.presentation.navigation.Routes
 
@@ -23,11 +24,11 @@ fun CharactersListScreen(navController: NavHostController) {
     val characterListItems: LazyPagingItems<Character> =
         uiState.characters.collectAsLazyPagingItems()
 
-    if (uiState.isLoading)
-        Loader()
-    else
-        Content(characterListItems, navController)
-
+    when {
+        uiState.isLoadingError -> Error { characterListItems.retry() }
+        uiState.isLoading -> Loader()
+        else -> Content(characterListItems, navController)
+    }
 }
 
 @Composable

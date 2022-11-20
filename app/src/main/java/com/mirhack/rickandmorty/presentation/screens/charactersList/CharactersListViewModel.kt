@@ -43,5 +43,9 @@ class CharactersListViewModel @Inject constructor(
         source.loadingPage.onEach { loadingPage ->
             _viewModelState.update { it.copy(isLoading = loadingPage == 1) }
         }.launchIn(viewModelScope)
+
+        source.isLoadingError.onEach { isError ->
+            _viewModelState.update { it.copy(isLoadingError = isError) }
+        }.launchIn(viewModelScope)
     }
 }

@@ -22,9 +22,14 @@ class CharacterInfoViewModel @Inject constructor(
 
     fun init(id: Int) {
         viewModelScope.launch {
-            val character = repository.getCharacter(id)
-            val episodes = repository.getEpisodes(character.episodes)
-            _viewModelState.update { it.copy(character = character.toCharacterInfo(episodes)) }
+            try {
+                _viewModelState.update { it.copy(character = null, isLoadingError = false) }
+                val character = repository.getCharacter(id)
+                val episodes = repository.getEpisodes(character.episodes)
+                _viewModelState.update { it.copy(character = character.toCharacterInfo(episodes)) }
+            } catch (e: Exception) {
+                _viewModelState.update { it.copy(isLoadingError = true) }
+            }
         }
     }
 

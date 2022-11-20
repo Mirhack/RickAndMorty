@@ -7,5 +7,6 @@ import kotlinx.coroutines.flow.emptyFlow
 
 data class CharactersListState(
     val isLoading: Boolean = true,
+    val isLoadingError: Boolean = false,
     val characters: Flow<PagingData<Character>> = emptyFlow()
 )

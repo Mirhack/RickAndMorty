@@ -18,6 +18,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.presentation.elements.CharactersSection
+import com.mirhack.rickandmorty.presentation.elements.Error
 import com.mirhack.rickandmorty.presentation.elements.Loader
 import com.mirhack.rickandmorty.presentation.elements.TextBlock
 import com.mirhack.rickandmorty.presentation.navigation.Routes
@@ -30,10 +31,11 @@ fun LocationInfoScreen(id: Int?, navController: NavController) {
     LaunchedEffect(key1 = id) { id?.let { viewModel.init(it) } }
     val uiState by remember { viewModel.viewModelState }.collectAsState()
 
-    if (uiState.location == null)
-        Loader()
-    else
-        Content(uiState, navController)
+    when {
+        uiState.isLoadingError -> Error { id?.let { viewModel.init(it) } }
+        uiState.location == null -> Loader()
+        else -> Content(uiState, navController)
+    }
 }
 
 @Composable

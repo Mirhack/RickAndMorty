@@ -14,6 +14,8 @@ class CharactersSource @Inject constructor(
 
     private val _loadingPage = MutableStateFlow(-1)
     val loadingPage = _loadingPage.asStateFlow()
+    private val _isLoadingError = MutableStateFlow(false)
+    val isLoadingError = _isLoadingError.asStateFlow()
 
     override fun getRefreshKey(state: PagingState<Int, Character>): Int? {
         return state.anchorPosition
@@ -22,6 +24,7 @@ class CharactersSource @Inject constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Character> {
         return try {
             val page = params.key ?: 1
+            _isLoadingError.emit(false)
             _loadingPage.emit(page)
             val charactersResponse = apiService.listCharacters(page = page)
             LoadResult.Page(
@@ -30,6 +33,7 @@ class CharactersSource @Inject constructor(
                 nextKey = if (charactersResponse.info.next == null) null else page + 1
             )
         } catch (exception: Exception) {
+            _isLoadingError.emit(true)
             return LoadResult.Error(exception)
         } finally {
             _loadingPage.emit(-1)

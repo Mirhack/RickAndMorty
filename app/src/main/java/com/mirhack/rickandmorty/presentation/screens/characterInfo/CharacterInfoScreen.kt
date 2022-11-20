@@ -29,6 +29,7 @@ import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.domain.model.Episode
 import com.mirhack.rickandmorty.presentation.elements.CharacterTitle
 import com.mirhack.rickandmorty.presentation.elements.ChipBlock
+import com.mirhack.rickandmorty.presentation.elements.Error
 import com.mirhack.rickandmorty.presentation.elements.Loader
 import com.mirhack.rickandmorty.presentation.elements.TextBlock
 import com.mirhack.rickandmorty.presentation.navigation.Routes
@@ -42,10 +43,11 @@ fun CharacterInfoScreen(id: Int?, navController: NavController) {
     LaunchedEffect(key1 = id) { id?.let { viewModel.init(it) } }
     val uiState by remember { viewModel.viewModelState }.collectAsState()
 
-    if (uiState.character == null)
-        Loader()
-    else
-        Content(uiState, navController)
+    when {
+        uiState.isLoadingError -> Error { id?.let { viewModel.init(it) } }
+        uiState.character == null -> Loader()
+        else -> Content(uiState, navController)
+    }
 }
 
 @Composable
