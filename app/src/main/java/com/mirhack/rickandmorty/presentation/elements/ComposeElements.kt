@@ -12,8 +12,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material.Card
+import androidx.compose.material.Chip
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -23,6 +28,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.times
 import coil.compose.AsyncImage
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.domain.model.Character
@@ -150,6 +156,52 @@ fun TextBlock(
         text = description,
         style = Typography.h4
     )
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun ChipBlock(
+    title: String,
+    description: String,
+    onClick: () -> Unit
+) {
+    Text(
+        modifier = Modifier.padding(top = 8.dp),
+        text = title,
+        style = Typography.subtitle1
+    )
+    Chip(
+        modifier = Modifier.padding(end = 8.dp),
+        shape = Shapes.medium, onClick = onClick
+    ) {
+        Text(
+            text = description,
+            maxLines = 1,
+            overflow = TextOverflow.Ellipsis,
+        )
+    }
+}
+
+@Composable
+fun CharactersSection(
+    title: String,
+    characters: List<Character>,
+    onItemClick: (id: Int) -> Unit
+) {
+    Text(
+        modifier = Modifier.padding(top = 8.dp),
+        text = title,
+        style = Typography.h2,
+    )
+    val rowsCount = 3
+    LazyHorizontalGrid(
+        rows = GridCells.Fixed(rowsCount),
+        modifier = Modifier.height(rowsCount * SMALL_CARD_SIZE.dp)
+    ) {
+        items(characters) {
+            SmallCharacterCard(character = it, clickListener = onItemClick)
+        }
+    }
 }
 
 @Composable

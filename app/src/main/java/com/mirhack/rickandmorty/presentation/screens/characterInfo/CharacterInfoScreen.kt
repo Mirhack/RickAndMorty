@@ -28,6 +28,7 @@ import coil.compose.AsyncImage
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.domain.model.Episode
 import com.mirhack.rickandmorty.presentation.elements.CharacterTitle
+import com.mirhack.rickandmorty.presentation.elements.ChipBlock
 import com.mirhack.rickandmorty.presentation.elements.Loader
 import com.mirhack.rickandmorty.presentation.elements.TextBlock
 import com.mirhack.rickandmorty.presentation.navigation.Routes
@@ -76,13 +77,17 @@ private fun Content(uiState: CharactersInfoState, navController: NavController) 
                     title = stringResource(R.string.gender),
                     description = character.gender,
                 )
-                TextBlock(
+                LocationBlock(
+                    locationId = character.location.id,
                     title = stringResource(R.string.last_known_location),
                     description = character.location.name,
+                    navController = navController
                 )
-                TextBlock(
+                LocationBlock(
+                    locationId = character.origin.id,
                     title = stringResource(R.string.first_seen_in),
                     description = character.origin.name,
+                    navController = navController
                 )
                 Text(
                     modifier = Modifier.padding(top = 8.dp),
@@ -91,11 +96,27 @@ private fun Content(uiState: CharactersInfoState, navController: NavController) 
                 )
                 LazyRow(Modifier.padding(top = 8.dp)) {
                     items(character.episodes) {
-                        EpisodeChip(it) { id -> navController.navigate(Routes.EpisodeInfoScreen.route + "/$id") }
+                        EpisodeChip(it) { id -> navController.navigate(Routes.EpisodeInfoScreen("$id").route) }
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+private fun LocationBlock(
+    locationId: Int?,
+    title: String,
+    description: String,
+    navController: NavController
+) {
+    if (locationId != null) {
+        ChipBlock(title, description) {
+            navController.navigate(Routes.LocationInfoScreen("$locationId").route)
+        }
+    } else {
+        TextBlock(title, description)
     }
 }
 

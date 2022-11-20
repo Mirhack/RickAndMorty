@@ -39,7 +39,7 @@ private fun Content(
         items(characterListItems) { character ->
             character?.let {
                 CharacterCard(it)
-                { id -> navController.navigate(Routes.CharacterInfoScreen.route + "/$id") }
+                { id -> navController.navigate(Routes.CharacterInfoScreen("$id").route) }
             }
         }
     })

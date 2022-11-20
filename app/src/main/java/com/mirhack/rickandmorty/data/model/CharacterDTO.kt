@@ -19,7 +19,7 @@ data class CharacterDTO(
     @SerializedName("origin")
     val origin: OriginDTO,
     @SerializedName("location")
-    val location: LocationDTO,
+    val location: LocationLinkDTO,
     @SerializedName("image")
     val image: String,
     @SerializedName("episode")

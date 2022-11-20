@@ -6,6 +6,7 @@ import com.mirhack.rickandmorty.data.mapper.toDomainEpisodes
 import com.mirhack.rickandmorty.domain.Repository
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.domain.model.Episode
+import com.mirhack.rickandmorty.domain.model.Location
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -25,5 +26,8 @@ class RepositoryImpl @Inject constructor(
 
     override suspend fun getEpisodes(ids: List<Int>): List<Episode> =
         withContext(IO) { apiService.multipleEpisodes(ids).toDomainEpisodes() }
+
+    override suspend fun getLocation(id: Int): Location =
+        withContext(IO) { apiService.singleLocation(id).toDomain() }
 
 }

@@ -16,6 +16,7 @@ import com.mirhack.rickandmorty.presentation.navigation.Routes
 import com.mirhack.rickandmorty.presentation.screens.characterInfo.CharacterInfoScreen
 import com.mirhack.rickandmorty.presentation.screens.charactersList.CharactersListScreen
 import com.mirhack.rickandmorty.presentation.screens.episodeInfo.EpisodeInfoScreen
+import com.mirhack.rickandmorty.presentation.screens.locationInfo.LocationInfoScreen
 import com.mirhack.rickandmorty.presentation.ui.theme.RickAndMortyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,7 +39,7 @@ class MainActivity : ComponentActivity() {
                             CharactersListScreen(navController)
                         }
                         composable(
-                            route = Routes.CharacterInfoScreen.route + "/{id}",
+                            route = Routes.CharacterInfoScreen("{id}").route,
                             arguments = listOf(navArgument("id") { type = NavType.IntType })
                         ) { backStackEntry ->
                             CharacterInfoScreen(
@@ -47,10 +48,19 @@ class MainActivity : ComponentActivity() {
                             )
                         }
                         composable(
-                            route = Routes.EpisodeInfoScreen.route + "/{id}",
+                            route = Routes.EpisodeInfoScreen("{id}").route,
                             arguments = listOf(navArgument("id") { type = NavType.IntType })
                         ) { backStackEntry ->
                             EpisodeInfoScreen(
+                                id = backStackEntry.arguments?.getInt("id"),
+                                navController = navController
+                            )
+                        }
+                        composable(
+                            route = Routes.LocationInfoScreen("{id}").route,
+                            arguments = listOf(navArgument("id") { type = NavType.IntType })
+                        ) { backStackEntry ->
+                            LocationInfoScreen(
                                 id = backStackEntry.arguments?.getInt("id"),
                                 navController = navController
                             )

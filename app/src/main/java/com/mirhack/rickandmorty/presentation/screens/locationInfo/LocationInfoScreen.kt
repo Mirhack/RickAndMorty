@@ -1,7 +1,7 @@
-package com.mirhack.rickandmorty.presentation.screens.episodeInfo
+package com.mirhack.rickandmorty.presentation.screens.locationInfo
 
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -25,39 +25,40 @@ import com.mirhack.rickandmorty.presentation.ui.theme.Typography
 
 
 @Composable
-fun EpisodeInfoScreen(id: Int?, navController: NavController) {
-    val viewModel = hiltViewModel<EpisodeInfoViewModel>()
+fun LocationInfoScreen(id: Int?, navController: NavController) {
+    val viewModel = hiltViewModel<LocationInfoViewModel>()
     LaunchedEffect(key1 = id) { id?.let { viewModel.init(it) } }
     val uiState by remember { viewModel.viewModelState }.collectAsState()
 
-    if (uiState.episode == null)
+    if (uiState.location == null)
         Loader()
     else
         Content(uiState, navController)
 }
 
 @Composable
-private fun Content(uiState: EpisodeInfoState, navController: NavController) {
+private fun Content(uiState: LocationInfoState, navController: NavController) {
     Column(
         Modifier
-            .fillMaxSize()
+            .fillMaxWidth()
             .verticalScroll(rememberScrollState())
     ) {
-        uiState.episode?.let { episode ->
+
+        uiState.location?.let { location ->
             Column(Modifier.padding(16.dp)) {
                 Text(
-                    text = episode.name,
+                    text = location.name,
                     style = Typography.h1,
                 )
                 TextBlock(
-                    title = stringResource(R.string.air_date),
-                    description = episode.airDate
+                    title = stringResource(R.string.type),
+                    description = location.type
                 )
                 TextBlock(
-                    title = stringResource(R.string.production_code),
-                    description = episode.code
+                    title = stringResource(R.string.dimension),
+                    description = location.dimension
                 )
-                CharactersSection(stringResource(R.string.characters), episode.characters) { id ->
+                CharactersSection(stringResource(R.string.residents), location.residents) { id ->
                     navController.navigate(Routes.CharacterInfoScreen("$id").route)
                 }
             }
