@@ -89,7 +89,7 @@ fun CharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
                 )
                 TextBlock(
                     title = stringResource(R.string.last_known_location),
-                    description = character.location.name,
+                    description = character.lastKnownLocation.name,
                     1
                 )
             }

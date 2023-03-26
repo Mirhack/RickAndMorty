@@ -6,7 +6,8 @@ import androidx.room.Junction
 import androidx.room.Relation
 import com.mirhack.rickandmorty.data.db.COLUMN_CHARACTER_ID
 import com.mirhack.rickandmorty.data.db.COLUMN_LOCATION_LINK_NAME
-import com.mirhack.rickandmorty.data.db.crossrefs.CharacterToLocationLinkCrossRef
+import com.mirhack.rickandmorty.data.db.crossrefs.CharacterToLastLocationCrossRef
+import com.mirhack.rickandmorty.data.db.crossrefs.CharacterToOriginCrossRef
 
 data class CharacterFull(
     @Embedded val character: CharacterEntity,
@@ -14,13 +15,13 @@ data class CharacterFull(
     @Relation(
         parentColumn = COLUMN_CHARACTER_ID,
         entityColumn = COLUMN_LOCATION_LINK_NAME,
-        associateBy = Junction(CharacterToLocationLinkCrossRef::class)
+        associateBy = Junction(CharacterToOriginCrossRef::class)
     )
-    val origin: LocationLinkEntity,
+    val origin: LocationLinkEntity?,
     @Relation(
         parentColumn = COLUMN_CHARACTER_ID,
         entityColumn = COLUMN_LOCATION_LINK_NAME,
-        associateBy = Junction(CharacterToLocationLinkCrossRef::class)
+        associateBy = Junction(CharacterToLastLocationCrossRef::class)
     )
-    val location: LocationLinkEntity,
+    val location: LocationLinkEntity?,
 )

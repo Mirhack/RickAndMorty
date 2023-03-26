@@ -1,8 +1,10 @@
 package com.mirhack.rickandmorty.data.db
 
 internal const val TABLE_CHARACTERS = "characters"
-internal const val TABLE_LOCATION_LINKS = "location_link"
-internal const val TABLE_CHARACTER_TO_LOCATION_LINK = "character_to_location_link"
+internal const val TABLE_LAST_LOCATIONS = "last_locations"
+internal const val TABLE_ORIGINS = "origins"
+internal const val TABLE_CHARACTER_TO_LAST_LOCATION = "character_to_last_location"
+internal const val TABLE_CHARACTER_TO_ORIGIN = "character_to_origin"
 
 internal const val COLUMN_CHARACTER_ID = "character_id"
 internal const val COLUMN_CHARACTER_NAME = "character_name"

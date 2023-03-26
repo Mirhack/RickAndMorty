@@ -9,7 +9,7 @@ data class Character(
     val type: String,
     val gender: String,
     val origin: LocationLink,
-    val location: LocationLink,
+    val lastKnownLocation: LocationLink,
     val image: String,
     val episodes: List<Int>,
 )

@@ -52,13 +52,13 @@ private fun Content(
             }
         })
 
-    GlideLazyListPreloader(
-        state = state,
-        data = characterListItems.itemSnapshotList.items,
-        size = Size(150f, 150f),
-        numberOfItemsToPreload = 20,
-    ){ item, requestBuilder ->
-        requestBuilder.load(item.image)
-    }
+//    GlideLazyListPreloader(
+//        state = state,
+//        data = characterListItems.itemSnapshotList.items,
+//        size = Size(150f, 150f),
+//        numberOfItemsToPreload = 19,
+//    ){ item, requestBuilder ->
+//        requestBuilder.load(item.image)
+//    }
 }
 

@@ -17,7 +17,7 @@ class RoomModule {
     @Provides
     @Singleton
     fun room(@ApplicationContext context: Context): Database {
-        return Room.inMemoryDatabaseBuilder(context, Database::class.java)
+        return Room.databaseBuilder(context = context, klass = Database::class.java, name = "rick_and_morty.db")
             .build()
     }
 }

@@ -16,7 +16,7 @@ fun Character.toCharacterInfo(episodes: List<Episode>) =
         type = type,
         gender = gender,
         origin = origin,
-        location = location,
+        location = lastKnownLocation,
         image = image,
         episodes = episodes
     )
