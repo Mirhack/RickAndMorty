@@ -37,6 +37,8 @@ import com.airbnb.lottie.compose.LottieAnimation
 import com.airbnb.lottie.compose.LottieCompositionSpec
 import com.airbnb.lottie.compose.animateLottieCompositionAsState
 import com.airbnb.lottie.compose.rememberLottieComposition
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.mirhack.rickandmorty.R
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.presentation.ui.theme.Mantis
@@ -49,6 +51,7 @@ const val SMALL_CARD_SIZE = 200
 private const val ALIVE = "Alive"
 private const val DEAD = "Dead"
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun CharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
     Card(
@@ -61,12 +64,19 @@ fun CharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
     ) {
         Row {
             Column {
-                AsyncImage(
+                GlideImage(
                     modifier = Modifier.fillMaxHeight(),
+                    contentScale = ContentScale.FillHeight,
                     alignment = Alignment.CenterStart,
                     model = character.image,
                     contentDescription = null
-                )
+                ) {
+                    it.thumbnail(
+                        it.clone()
+                            .load(character.image)
+                            .override(150)
+                    )
+                }
             }
             Column(Modifier.padding(16.dp, 8.dp, 8.dp, 8.dp)) {
                 CharacterTitle(
@@ -126,7 +136,7 @@ fun CharacterTitle(
     status: String,
     species: String,
     showType: Boolean,
-    maxLines: Int = 999
+    maxLines: Int = 999,
 ) {
     Text(
         text = name,
@@ -151,7 +161,7 @@ fun CharacterTitle(
 fun TextBlock(
     title: String,
     description: String,
-    maxLines: Int = 999
+    maxLines: Int = 999,
 ) {
     Text(
         modifier = Modifier.padding(top = 8.dp),
@@ -171,7 +181,7 @@ fun TextBlock(
 fun ChipBlock(
     title: String,
     description: String,
-    onClick: () -> Unit
+    onClick: () -> Unit,
 ) {
     Text(
         modifier = Modifier.padding(top = 8.dp),
@@ -194,7 +204,7 @@ fun ChipBlock(
 fun CharactersSection(
     title: String,
     characters: List<Character>,
-    onItemClick: (id: Int) -> Unit
+    onItemClick: (id: Int) -> Unit,
 ) {
     Text(
         modifier = Modifier.padding(top = 8.dp),
