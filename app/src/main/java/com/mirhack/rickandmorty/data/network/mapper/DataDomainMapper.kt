@@ -1,15 +1,13 @@
-package com.mirhack.rickandmorty.data.mapper
+package com.mirhack.rickandmorty.data.network.mapper
 
-import com.mirhack.rickandmorty.data.model.CharacterDTO
-import com.mirhack.rickandmorty.data.model.EpisodeDTO
-import com.mirhack.rickandmorty.data.model.LocationDTO
-import com.mirhack.rickandmorty.data.model.LocationLinkDTO
-import com.mirhack.rickandmorty.data.model.OriginDTO
+import com.mirhack.rickandmorty.data.network.model.CharacterDTO
+import com.mirhack.rickandmorty.data.network.model.EpisodeDTO
+import com.mirhack.rickandmorty.data.network.model.LocationDTO
+import com.mirhack.rickandmorty.data.network.model.LocationLinkDTO
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.domain.model.Episode
 import com.mirhack.rickandmorty.domain.model.Location
 import com.mirhack.rickandmorty.domain.model.LocationLink
-import com.mirhack.rickandmorty.domain.model.Origin
 
 fun List<CharacterDTO>.toDomainCharacters() =
     map(CharacterDTO::toDomain)
@@ -27,9 +25,6 @@ fun CharacterDTO.toDomain() =
         image = image,
         episodes = episode.mapNotNull(String::getId),
     )
-
-fun OriginDTO.toDomain() =
-    Origin(name, url.getId())
 
 fun LocationLinkDTO.toDomain() =
     LocationLink(name, url.getId())

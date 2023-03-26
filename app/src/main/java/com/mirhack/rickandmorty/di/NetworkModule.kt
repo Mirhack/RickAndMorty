@@ -1,6 +1,6 @@
 package com.mirhack.rickandmorty.di
 
-import com.mirhack.rickandmorty.data.RepositoryImpl
+import com.mirhack.rickandmorty.data.network.RepositoryImpl
 import com.mirhack.rickandmorty.domain.Repository
 import dagger.Binds
 import dagger.Module
@@ -14,6 +14,6 @@ interface NetworkModule {
 
     @Binds
     @Singleton
-    fun bindRepository(repository:RepositoryImpl):Repository
+    fun bindRepository(repository: RepositoryImpl):Repository
 
 }

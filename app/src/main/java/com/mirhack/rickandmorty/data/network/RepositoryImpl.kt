@@ -1,8 +1,8 @@
-package com.mirhack.rickandmorty.data
+package com.mirhack.rickandmorty.data.network
 
-import com.mirhack.rickandmorty.data.mapper.toDomain
-import com.mirhack.rickandmorty.data.mapper.toDomainCharacters
-import com.mirhack.rickandmorty.data.mapper.toDomainEpisodes
+import com.mirhack.rickandmorty.data.network.mapper.toDomain
+import com.mirhack.rickandmorty.data.network.mapper.toDomainCharacters
+import com.mirhack.rickandmorty.data.network.mapper.toDomainEpisodes
 import com.mirhack.rickandmorty.domain.Repository
 import com.mirhack.rickandmorty.domain.model.Character
 import com.mirhack.rickandmorty.domain.model.Episode
@@ -10,6 +10,7 @@ import com.mirhack.rickandmorty.domain.model.Location
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
+import com.mirhack.rickandmorty.data.network.RickAndMortyApiService
 
 class RepositoryImpl @Inject constructor(
     private val apiService: RickAndMortyApiService

@@ -1,4 +1,4 @@
-package com.mirhack.rickandmorty.data.model
+package com.mirhack.rickandmorty.data.network.model
 
 
 import com.google.gson.annotations.SerializedName

@@ -1,9 +1,9 @@
-package com.mirhack.rickandmorty.data
+package com.mirhack.rickandmorty.data.network
 
-import com.mirhack.rickandmorty.data.model.CharacterDTO
-import com.mirhack.rickandmorty.data.model.CharactersResponse
-import com.mirhack.rickandmorty.data.model.EpisodeDTO
-import com.mirhack.rickandmorty.data.model.LocationDTO
+import com.mirhack.rickandmorty.data.network.model.CharacterDTO
+import com.mirhack.rickandmorty.data.network.model.CharactersResponse
+import com.mirhack.rickandmorty.data.network.model.EpisodeDTO
+import com.mirhack.rickandmorty.data.network.model.LocationDTO
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

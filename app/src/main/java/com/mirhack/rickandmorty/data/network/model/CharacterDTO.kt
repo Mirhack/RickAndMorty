@@ -1,4 +1,4 @@
-package com.mirhack.rickandmorty.data.model
+package com.mirhack.rickandmorty.data.network.model
 
 
 import com.google.gson.annotations.SerializedName
@@ -17,7 +17,7 @@ data class CharacterDTO(
     @SerializedName("gender")
     val gender: String,
     @SerializedName("origin")
-    val origin: OriginDTO,
+    val origin: LocationLinkDTO,
     @SerializedName("location")
     val location: LocationLinkDTO,
     @SerializedName("image")

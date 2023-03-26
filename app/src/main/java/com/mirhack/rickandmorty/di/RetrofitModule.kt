@@ -1,6 +1,6 @@
 package com.mirhack.rickandmorty.di
 
-import com.mirhack.rickandmorty.data.RickAndMortyApiService
+import com.mirhack.rickandmorty.data.network.RickAndMortyApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

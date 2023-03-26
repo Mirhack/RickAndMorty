@@ -1,8 +1,8 @@
-package com.mirhack.rickandmorty.data
+package com.mirhack.rickandmorty.data.network
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.mirhack.rickandmorty.data.mapper.toDomainCharacters
+import com.mirhack.rickandmorty.data.network.mapper.toDomainCharacters
 import com.mirhack.rickandmorty.domain.model.Character
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
