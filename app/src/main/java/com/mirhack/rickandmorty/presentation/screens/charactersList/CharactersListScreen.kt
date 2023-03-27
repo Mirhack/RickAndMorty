@@ -52,6 +52,7 @@ private fun Content(
             }
         })
 
+//    https://github.com/bumptech/glide/pull/4951
 //    GlideLazyListPreloader(
 //        state = state,
 //        data = characterListItems.itemSnapshotList.items,

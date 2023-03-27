@@ -1,12 +1,17 @@
 package com.mirhack.rickandmorty.presentation.screens.charactersList
 
+import javax.inject.Inject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.ExperimentalPagingApi
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
+import com.mirhack.rickandmorty.data.db.Database
+import com.mirhack.rickandmorty.data.mediators.CharactersRemoteMediator
 import com.mirhack.rickandmorty.data.network.CharactersSource
+import com.mirhack.rickandmorty.data.network.mapper.toDomain
 import com.mirhack.rickandmorty.domain.model.Character
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -15,11 +20,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.update
-import javax.inject.Inject
-import androidx.paging.ExperimentalPagingApi
-import com.mirhack.rickandmorty.data.db.Database
-import com.mirhack.rickandmorty.data.mediators.CharactersRemoteMediator
-import com.mirhack.rickandmorty.data.network.mapper.toDomain
 
 @HiltViewModel
 class CharactersListViewModel @Inject constructor(
@@ -47,7 +47,10 @@ class CharactersListViewModel @Inject constructor(
 
         val characters: Flow<PagingData<Character>> =
             Pager(
-                config = PagingConfig(pageSize = 20),
+                config = PagingConfig(
+                    pageSize = 20,
+                    initialLoadSize = 20
+                ),
                 remoteMediator = charactersRemoteMediator,
                 pagingSourceFactory = pagingSourceFactory,
             ).flow.cachedIn(viewModelScope)

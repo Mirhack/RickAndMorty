@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -65,7 +66,9 @@ fun CharacterCard(character: Character, clickListener: (id: Int) -> Unit) {
         Row {
             Column {
                 GlideImage(
-                    modifier = Modifier.fillMaxHeight(),
+                    modifier = Modifier
+                        .fillMaxHeight()
+                        .width(150.dp),
                     contentScale = ContentScale.FillHeight,
                     alignment = Alignment.CenterStart,
                     model = character.image,
